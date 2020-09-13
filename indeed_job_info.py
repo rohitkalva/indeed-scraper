@@ -62,7 +62,7 @@ def prepare_job_links(soup):
 def capture_time_posted(soup):
     """Prepare list of times when each job was posted"""
     posted_times = []
-    results = soup.select('span[class*="date "]')
+    results = soup.select('span[class*="date"]')
     for i in range(len(results)):
         posted_time = results[i].text
         eng_posted_time = translations[posted_time]
