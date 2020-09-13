@@ -20,6 +20,8 @@ URL_SUFFIX_NUMBERS = PAGE_RESULTS_NUMBERS[:number_of_search_pages]
 location = "Berlin"
 sort_type = "date"
 language = "en"
+search_query = "backend developer"
+query = search_query.replace(" ", "+")
 
 # Time and date variables
 now = datetime.now()
@@ -35,7 +37,7 @@ def main():
     # Loop through each page of job adverts
     for search_page in URL_SUFFIX_NUMBERS:
         # Create soup object for current main jobs listing page
-        soup = indeed.main_page_setup(search_page, location, sort_type, language)
+        soup = indeed.main_page_setup(search_page, location, sort_type, query)
         # Extract job links from page
         job_links = indeed.prepare_job_links(soup)
         # Extract the times each job was posted from the main jobs page

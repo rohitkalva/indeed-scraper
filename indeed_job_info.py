@@ -6,13 +6,18 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
+from googletrans import Translator, constants
+import re
 
 # Constant variables
 URL_PREFIX = 'https://de.indeed.com'
 
+# init the Google API translator
+translator = Translator()
+
 # Time and date variables
 now = datetime.now()
-file_date = now.strftime("%Y_%m_%d")
+file_date = now.strftime("%Y_%m_%d") +'_' + now.strftime("%H_%M_%S")
 
 # Div class selectors
 company_class = "icl-u-lg-mr--sm icl-u-xs-mr--xs"
@@ -42,10 +47,10 @@ translations = {
         'Vor mehr als 30 Tagen' : 'More than 30 days ago',
 }
 
-def main_page_setup(search_page, location, sort_type, language):
+def main_page_setup(search_page, location, sort_type, query):
     """Create soup object for main jobs page"""
-    url = f'https://de.indeed.com/Jobs?l={location}&sort={sort_type}' \
-                                f'&lang={language}&start={search_page}'
+    url = f'https://de.indeed.com/Jobs?q={query}&l={location}&sort={sort_type}' \
+                                f'&start={search_page}'
     main_jobs_page = requests.get(url).text
     soup = BeautifulSoup(main_jobs_page, 'lxml')
     return soup
@@ -89,14 +94,20 @@ def scrape_page_data(soup):
 
     location = soup.find('div', class_=f'{location_class}').find_all('div')[-1].text
     job_info = soup.find('div', id="jobDescriptionText").text
-    job_data = [title, company, location, job_info]
+    job_info_translated = translator.translate(job_info, src="de")
+    email = re.search(r'[\w\.-]+@[\w\.-]+', job_info)
+    if email is None:
+        email_address = 'Not available'
+    else:
+        email_address = email.group(0)
+    job_data = [title, company, location, job_info,job_info_translated.text,email_address]
     return job_data
 
 def export_data(job_dict):
     """Create DataFrame and export data to CSV file"""
     job_data = pd.DataFrame.from_dict(job_dict, orient='index',
         columns=['Date', 'Time', 'Posted', 'Job Title', 'Company',
-                 'Location', 'Job Description', 'Job URL'])
+                 'Location', 'Job Description', 'Job Description Translated', 'E-Mail Address', 'Job URL'])
     # Export to CSV
     job_data.to_csv(r'output_data/indeed_job_data_{}.csv'.format(file_date))
 
