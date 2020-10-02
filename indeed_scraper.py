@@ -23,10 +23,10 @@ PAGE_RESULTS_NUMBERS = list(range(0, 300, 10))
 URL_SUFFIX_NUMBERS = PAGE_RESULTS_NUMBERS[:number_of_search_pages]
 
 # Location, sorting and language
-# location = "Berlin"
+# location = "Berlin"                this is sample 
 sort_type = "date"
 language = "en"
-# search_query = "backend developer"
+# search_query = "backend developer"             this is sample
 query = search_query.replace(" ", "+")
 
 # Time and date variables

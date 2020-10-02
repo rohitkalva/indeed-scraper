@@ -35,4 +35,5 @@ To use the program, follow the steps below:
 **NOTE**
 
 This program has been modified to search for jobs with title backend developer in the Berlin area which are then sorted by date posted. However, the `location`, `sort_type`, and `query` variables within indeed_scraper.py can be changed to generate different search results.
+If no need of changing the above `sort_type`.Directly run the file . As it will ask you for location , job title and no of pages to be searched in the indeed website
 ---
