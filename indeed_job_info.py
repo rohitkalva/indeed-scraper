@@ -16,8 +16,8 @@ URL_PREFIX = 'https://de.indeed.com'
 translator = Translator()
 
 # Time and date variables
-now = datetime.now()
-file_date = now.strftime("%Y_%m_%d") +'_' + now.strftime("%H_%M_%S")
+cur_date = datetime.now()
+file_date = cur_date.strftime("%Y_%m_%d") +'_' + cur_date.strftime("%H_%M_%S")
 
 # Div class selectors
 company_class = "icl-u-lg-mr--sm icl-u-xs-mr--xs"
@@ -43,6 +43,24 @@ translations = {
         'vor 12 Tagen': '12 days ago',
         'vor 13 Tagen': '13 days ago',
         'vor 14 Tagen': '14 days ago',
+        'vor 15 Tagen': '15 days ago',
+        'vor 16 Tagen': '16 days ago',
+        'vor 17 Tagen': '17 days ago',
+        'vor 18 Tagen': '18 days ago',
+        'vor 19 Tagen': '19 days ago',
+        'vor 20 Tagen': '20 days ago',
+        'vor 21 Tagen': '21 days ago',
+        'vor 22 Tagen': '22 days ago',
+        'vor 23 Tagen': '23 days ago',
+        'vor 24 Tagen': '24 days ago',
+        'vor 25 Tagen': '25 days ago',
+        'vor 26 Tagen': '26 days ago',
+        'vor 27 Tagen': '27 days ago',
+        'vor 28 Tagen': '28 days ago',
+        'vor 29 Tagen': '29 days ago',
+        'vor 30 Tagen': '30 days ago',
+        'Vor mehr als 30\xa0Tagen':'More than 30 days ago',
+        
         'Gerade geschaltet': 'Just switched',
         'Vor mehr als 30 Tagen' : 'More than 30 days ago',
 }
@@ -109,5 +127,5 @@ def export_data(job_dict):
         columns=['Date', 'Time', 'Posted', 'Job Title', 'Company',
                  'Location', 'Job Description', 'Job Description Translated', 'E-Mail Address', 'Job URL'])
     # Export to CSV
-    job_data.to_csv(r'output_data/indeed_job_data_{}.csv'.format(file_date))
+    job_data.to_csv(r'indeed_job_data_{}.csv'.format(file_date))
 
