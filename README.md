@@ -21,14 +21,19 @@ Two columns are also generated and prepended to the extracted data:
 To use the program, follow the steps below:
 
 - Ensure both indeed_job_info.py and indeed_scraper.py are in the same directory
-- Create a new directory inside the directory that contains the above files and name it 'output_data'
+
 - Change the `NUMBER_OF_SEARCH_PAGES` variable inside of indeed_scraper.py to the number of pages you would like to extract (each page currently contains 15 job listings)
 - Run indeed_scraper.py
-
-Once the program has finished running, a CSV titled with the current date and time will be saved into the 'output_data' folder. From here, you can open the CSV file and sort through the job listing data.
+-A file will be CSV file will be created in the same directory
+-Remember this is only for jobs in Germany
+-While running the above file it will ask to input 3 thing 
+-1. The city you want job to be searched.
+-2. Your job title.
+-3. The number of pages to be searched in the website.
 
 ---
 **NOTE**
 
 This program has been modified to search for jobs with title backend developer in the Berlin area which are then sorted by date posted. However, the `location`, `sort_type`, and `query` variables within indeed_scraper.py can be changed to generate different search results.
+If no need of changing the above `sort_type`.Directly run the file . As it will ask you for location , job title and no of pages to be searched in the indeed website
 ---
